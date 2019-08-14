@@ -12,7 +12,7 @@ public class CreateProfileResponse {
 	
 	private String name;
 	private String profession;
-	private double annualIncome;
+	private String annualIncome;
 	private String mobileNo;
 	private String address;
 
