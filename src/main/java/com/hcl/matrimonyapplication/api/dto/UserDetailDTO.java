@@ -8,5 +8,10 @@ import lombok.Data;
 @Data
 public class UserDetailDTO {
 	private static final long serialVersionUID = -1855263580038277712L;
-	private Long profileId;	
-}
+	private Long profileId;
+	private int statusCode;
+	private String message;
+	
+	}	
+	
+

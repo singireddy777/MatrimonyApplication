@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.hcl.matrimonyapplication.api.dto.UserDTO;
 import com.hcl.matrimonyapplication.api.dto.UserDetailDTO;
 import com.hcl.matrimonyapplication.api.entity.User;
+import com.hcl.matrimonyapplication.api.exception.UserProfileNotFoundException;
 import com.hcl.matrimonyapplication.api.repository.UserRepository;
 
 @Service
@@ -18,21 +19,29 @@ public class UserServiceImpl implements UserService{
 	
 	@Autowired UserRepository userRepository;
 	@Override
-	public String loginUser(String userId, String password) {
+	public UserDTO loginUser(String userName, String password) {
 		
 		logger.info("inside the loginUser method in serviceImpl");
-		User user = userRepository.findById(userId).get();
-		logger.info("user data : "+user);
+		
+		UserDTO userDTO = null;
+		
+		User user = userRepository.findByUserName(userName);
+		
 		if(user!=null) {
-	         if(user.getUserId().equalsIgnoreCase(userId)&& user.getPassword().equals(password)) {
+			
+	         if(user.getUserName().equalsIgnoreCase(userName)&& user.getPassword().equals(password)) {
 	
-	    return "Login Successfully....";
+	        	  userDTO = new UserDTO();
+	        	 userDTO.setUserName(user.getUserName());
+	        	 userDTO.setProfileId(user.getProfileId());
+	        	 userDTO.setUserId(user.getUserId());
+	             BeanUtils.copyProperties(user, userDTO);
 	        }
 	else { 
-	       return "something went wrong please try again....";
+	       throw new UserProfileNotFoundException();
 	}
-	}
-	return "user doen't exist";
+		}
+		return userDTO;
 	}
 	@Override
 	public UserDetailDTO registerUser(UserDTO userDto) {
@@ -42,7 +51,8 @@ public class UserServiceImpl implements UserService{
 		User user1 = userRepository.save(user);
 		UserDetailDTO userDetailsDto = new UserDetailDTO();
 		userDetailsDto.setProfileId(user1.getProfileId());
+		userDetailsDto.setStatusCode(200);
+		userDetailsDto.setMessage("SUCCESS");
 		return userDetailsDto;
 	}
-
 }

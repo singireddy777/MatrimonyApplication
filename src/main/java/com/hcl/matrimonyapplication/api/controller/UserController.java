@@ -5,26 +5,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
-
 import com.hcl.matrimonyapplication.api.service.UserService;
-
-
 import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-
 import com.hcl.matrimonyapplication.api.dto.UserDTO;
 import com.hcl.matrimonyapplication.api.dto.UserDetailDTO;
-import com.hcl.matrimonyapplication.api.entity.User;
-import com.hcl.matrimonyapplication.api.service.UserService;
-
-
 /***
  * 
  * @author Anuradha
@@ -48,8 +37,8 @@ public class UserController {
 	
 	@PostMapping("/login")
 	
-	public ResponseEntity<String> loginUser(@RequestParam("userId")  String userId, @RequestParam ("password") String password) {
+	public ResponseEntity<UserDTO> loginUser(@RequestParam("userName")  String userName, @RequestParam ("password") String password) {
 		logger.info("inside controller method");
-		return new ResponseEntity<String>(userService.loginUser(userId, password), HttpStatus.OK);	
+		return new ResponseEntity<UserDTO>(userService.loginUser(userName, password), HttpStatus.OK);	
 	}
 }
