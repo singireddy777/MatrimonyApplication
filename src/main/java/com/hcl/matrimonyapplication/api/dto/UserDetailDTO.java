@@ -9,7 +9,7 @@ import lombok.Data;
 public class UserDetailDTO {
 	private static final long serialVersionUID = -1855263580038277712L;
 	
-	private int statusCode;
+	private Integer statusCode;
 	private String status;
 	private String message;
 	private Long profileId;	

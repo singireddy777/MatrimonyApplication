@@ -1,21 +1,27 @@
 package com.hcl.matrimonyapplication.api.entity;
-/***
- * @author Anuradha
- */
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+/***
+ * @author Anuradha
+ */
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import lombok.Data;
 
 @Entity
 @Data
 public class User {
 
-	private String userId;
-	private String password;
+	private static final Logger logger = LoggerFactory.getLogger(User.class);
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	private long profileId;
+	private long profileId;	
+	private String userId;
+	private String userName;
+	private String password;
 }

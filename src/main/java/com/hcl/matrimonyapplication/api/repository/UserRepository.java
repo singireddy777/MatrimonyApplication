@@ -10,4 +10,5 @@ import com.hcl.matrimonyapplication.api.entity.User;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 
+	public User findByUserName(String userName);
 }
