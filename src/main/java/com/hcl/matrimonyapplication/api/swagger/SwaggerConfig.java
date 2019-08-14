@@ -1,4 +1,4 @@
-package com.hcl.bankmanagementapp.api.swaggerconfig;
+package com.hcl.matrimonyapplication.api.swagger;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
