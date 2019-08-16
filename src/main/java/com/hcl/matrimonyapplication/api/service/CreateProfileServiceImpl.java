@@ -1,8 +1,6 @@
 package com.hcl.matrimonyapplication.api.service;
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -14,12 +12,16 @@ import com.hcl.matrimonyapplication.api.repository.CreateProfileRepository;
 
 @Service
 public class CreateProfileServiceImpl implements CreateProfileService {
+	
+	private static final Logger logger = LoggerFactory.getLogger(CreateProfileServiceImpl.class);
 
 	@Autowired
 	private CreateProfileRepository createProfileRepository;
 	
 	@Override
 	public ResponseDTO create (CreateProfileDTO createProfileDTO) {
+		
+		logger.info("inside the createProfile method in serviceImpl");
 		// TODO Auto-generated method stub
 		CreateProfile creteProfile=new CreateProfile();
 		
@@ -31,7 +33,7 @@ public class CreateProfileServiceImpl implements CreateProfileService {
 	
 		BeanUtils.copyProperties(createProfileDTO, creteProfile);
 		 createProfileRepository.save(creteProfile);
-		 responseDTO.setMessage("Register user");
+		 responseDTO.setMessage("user created successfullly");
 		 responseDTO.setStatusCode(200);
 		 return responseDTO;
 		 
