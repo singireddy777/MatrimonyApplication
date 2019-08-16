@@ -9,6 +9,7 @@ import org.mockito.Mock;
 import org.mockito.Mockito;
 import org.mockito.junit.MockitoJUnitRunner;
 
+import com.hcl.matrimonyapplication.api.dto.UserDTO;
 import com.hcl.matrimonyapplication.api.entity.User;
 import com.hcl.matrimonyapplication.api.repository.UserRepository;
 import com.hcl.matrimonyapplication.api.service.UserServiceImpl;
@@ -32,7 +33,7 @@ public class UserServiceTest {
 		
 		
 		Mockito.when(userRepository.findByUserName(user.getUserName())).thenReturn(user);
-	String result = userServiceimpl.loginUser(user.getUserName(), user.getPassword());
+	UserDTO result = userServiceimpl.loginUser(user.getUserName(), user.getPassword());
 	assertEquals("Login Successfully....", result);
 		
 	}

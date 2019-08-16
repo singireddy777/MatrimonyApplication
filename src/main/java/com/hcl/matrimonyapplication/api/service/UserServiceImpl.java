@@ -13,36 +13,46 @@ import com.hcl.matrimonyapplication.api.exception.UserProfileNotFoundException;
 import com.hcl.matrimonyapplication.api.repository.UserRepository;
 
 @Service
-public class UserServiceImpl implements UserService{
-	
+public class UserServiceImpl implements UserService {
+
 	private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
-	
-	@Autowired UserRepository userRepository;
+
+	@Autowired
+	UserRepository userRepository;
+
 	@Override
 	public UserDTO loginUser(String userName, String password) {
-		
+
 		logger.info("inside the loginUser method in serviceImpl");
-		
+
 		UserDTO userDTO = null;
-		
+
 		User user = userRepository.findByUserName(userName);
-		
-		if(user!=null) {
+
+		if (user != null) {
+
+			if (user.getUserName().equalsIgnoreCase(userName) && user.getPassword().equals(password)) {
+
+				userDTO = new UserDTO();
+
+				userDTO.setStatusCode(200);
+				userDTO.setStatusMessage("SUCCESS");
+				userDTO.setProfileId(user.getProfileId());
+				userDTO.setUserId(user.getUserId());
+
+				return userDTO;
+			} else {
+				throw new UserProfileNotFoundException("This user " + userName + " does not exits");
+			}
 			
-	         if(user.getUserName().equalsIgnoreCase(userName)&& user.getPassword().equals(password)) {
-	
-	        	  userDTO = new UserDTO();
-	        	 userDTO.setUserName(user.getUserName());
-	        	 userDTO.setProfileId(user.getProfileId());
-	        	 userDTO.setUserId(user.getUserId());
-	             BeanUtils.copyProperties(user, userDTO);
-	        }
-	else { 
-	       throw new UserProfileNotFoundException();
-	}
+		
 		}
-		return userDTO;
+		else {
+			throw new UserProfileNotFoundException("This user " + userName + " does not exits");
+		}
+
 	}
+
 	@Override
 	public UserDetailDTO registerUser(UserDTO userDto) {
 		logger.info("INSIDE REGISTER ---SERVICE");

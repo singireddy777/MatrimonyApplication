@@ -2,40 +2,41 @@ package com.hcl.matrimonyapplication.api.dto;
 /***
  * @author Venkat
  */
-import lombok.Data;
 
-@Data
 public class UserDTO {
 	
 	private long  userId;
 	private long profileId;
-	private String userName;
-	private String password;
+	private String statusMessage;
+	private int statusCode;;
+	 
 	
 	
+
 	public long getUserId() {
 		return userId;
 	}
 	public void setUserId(long userId) {
 		this.userId = userId;
 	}
-	public String getPassword() {
-		return password;
+	public long getProfileId() {
+		return profileId;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setProfileId(long profileId) {
+		this.profileId = profileId;
+	}
+	public String getStatusMessage() {
+		return statusMessage;
+	}
+	public void setStatusMessage(String statusMessage) {
+		this.statusMessage = statusMessage;
+	}
+	public int getStatusCode() {
+		return statusCode;
+	}
+	public void setStatusCode(int statusCode) {
+		this.statusCode = statusCode;
 	}
 
-public String getUserName() {
-	return userName;
-}
-public void setUserName(String userName) {
-	this.userName = userName;
-}
-@Override
-public String toString() {
-	return "UserDTO [userId=" + userId + ", profileId=" + profileId + ", userName=" + userName + ", password="
-			+ password + "]";
-}
 
 }

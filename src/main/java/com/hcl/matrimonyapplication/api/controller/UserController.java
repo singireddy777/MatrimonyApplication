@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import com.hcl.matrimonyapplication.api.dto.UserDTO;
 import com.hcl.matrimonyapplication.api.dto.UserDetailDTO;
+
 /***
  * 
  * @author Anuradha
@@ -24,21 +25,22 @@ import com.hcl.matrimonyapplication.api.dto.UserDetailDTO;
 @CrossOrigin(origins = "*")
 public class UserController {
 	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
-	
+
 	@Autowired
 	UserService userService;
-	
+
 	@PostMapping("/register")
 	public ResponseEntity<UserDetailDTO> register(@RequestBody UserDTO userDto) {
 		logger.info("INSIDE REGISTER METHOD--Controller!!!!!!!!!!!!!!!!!!");
 		UserDetailDTO user = userService.registerUser(userDto);
 		return new ResponseEntity<>(user, HttpStatus.OK);
 	}
-	
+
 	@PostMapping("/login")
-	
-	public ResponseEntity<UserDTO> loginUser(@RequestParam("userName")  String userName, @RequestParam ("password") String password) {
+
+	public ResponseEntity<UserDTO> loginUser(@RequestParam("userName") String userName,
+			@RequestParam("password") String password) {
 		logger.info("inside controller method");
-		return new ResponseEntity<UserDTO>(userService.loginUser(userName, password), HttpStatus.OK);	
+		return new ResponseEntity<UserDTO>(userService.loginUser(userName, password), HttpStatus.OK);
 	}
 }

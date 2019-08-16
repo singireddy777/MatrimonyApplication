@@ -46,8 +46,8 @@ user.setPassword("password");
 		UserDTO userDTO = new UserDTO();
 		userDTO.setProfileId(97773L);
 		userDTO.setUserId(878);
-		userDTO.setUserName("vensee");
-		userDTO.setPassword("password");
+		//userDTO.setUserName("vensee");
+		//userDTO.setPassword("password");
 		
 		Mockito.when(userService.loginUser(Mockito.anyString(),Mockito.anyString())).thenReturn(userDTO);
 		
