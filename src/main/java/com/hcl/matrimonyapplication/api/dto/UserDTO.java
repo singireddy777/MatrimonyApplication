@@ -1,14 +1,16 @@
 package com.hcl.matrimonyapplication.api.dto;
-/***
- * @author Anuradha
- */
+
 import lombok.Data;
 
+/***
+ * @author Venkat
+ */
 @Data
 public class UserDTO {
 	
-	private String userId;
+
+	private Long userId;
 	private String password;
 	private String userName;
-
+	 
 }

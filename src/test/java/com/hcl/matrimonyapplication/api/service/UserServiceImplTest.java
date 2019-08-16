@@ -33,7 +33,7 @@ public class UserServiceImplTest {
 		
 		User user = new User();
 		UserDTO userDTO = new UserDTO();
-		user.setUserId("Anu");
+		user.setUserId((long) 123);
 		user.setUserName("Anuradha");
 		user.setPassword("anu");
 		user.setProfileId(1);

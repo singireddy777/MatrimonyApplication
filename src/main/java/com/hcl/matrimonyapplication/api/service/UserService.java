@@ -13,7 +13,6 @@ import com.hcl.matrimonyapplication.api.dto.UserDetailDTO;
 public interface UserService {
 	
 	public UserDetailDTO registerUser(UserDTO userDto);
-
-	public String loginUser(String userId, String password);
+	public UserDetailDTO loginUser(String userName, String password);
 
 }

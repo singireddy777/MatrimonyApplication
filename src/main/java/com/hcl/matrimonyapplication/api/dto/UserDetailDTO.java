@@ -14,3 +14,4 @@ public class UserDetailDTO {
 	private String message;
 	private Long profileId;	
 }
+

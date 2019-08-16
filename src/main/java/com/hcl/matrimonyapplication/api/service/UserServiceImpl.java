@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.hcl.matrimonyapplication.api.dto.UserDTO;
 import com.hcl.matrimonyapplication.api.dto.UserDetailDTO;
 import com.hcl.matrimonyapplication.api.entity.User;
+import com.hcl.matrimonyapplication.api.exception.UserProfileNotFoundException;
 import com.hcl.matrimonyapplication.api.repository.UserRepository;
 /***
  * 
@@ -18,26 +19,31 @@ import com.hcl.matrimonyapplication.api.repository.UserRepository;
 @Service
 public class UserServiceImpl implements UserService {
 	private static final Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
-
 	@Autowired
 	UserRepository userRepository;
-
 	@Override
-	public String loginUser(String userName, String password) {
+	public UserDetailDTO loginUser(String userName, String password) {
+
 		logger.info("inside the loginUser method in serviceImpl");
+		UserDetailDTO userDTO = null;
 		User user = userRepository.findByUserName(userName);
-		logger.info("user data : " + user);
 		if (user != null) {
 			if (user.getUserName().equalsIgnoreCase(userName) && user.getPassword().equals(password)) {
-				return "Login Successfully....";
-			} 
-			else {
-				return "something went wrong please try again....";
+				userDTO = new UserDetailDTO();
+				userDTO.setStatusCode(200);
+				userDTO.setStatus("SUCCESS");
+				userDTO.setMessage("Login Successfully");
+				userDTO.setProfileId(user.getProfileId());
+		//		userDTO.setUserId(user.getUserId());
+				return userDTO;
+			} else {
+				throw new UserProfileNotFoundException("This user " + userName + " does not exits");
 			}
 		}
-		return "user doen't exist";
+		else {
+			throw new UserProfileNotFoundException("This user " + userName + " does not exits");
+		}
 	}
-
 	@Override
 	public UserDetailDTO registerUser(UserDTO userDto) {
 		logger.info("INSIDE REGISTER ---SERVICE");
@@ -51,6 +57,7 @@ public class UserServiceImpl implements UserService {
 		if(user1.getPassword() != null) 
 		{
 		userDetailsDto.setProfileId(user1.getProfileId());
+
 		userDetailsDto.setMessage("User Profile is Successfully Registered...");
 		userDetailsDto.setStatus("SUCCESS");
 		userDetailsDto.setStatusCode(200);

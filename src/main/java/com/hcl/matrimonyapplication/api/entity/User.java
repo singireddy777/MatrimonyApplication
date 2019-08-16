@@ -5,11 +5,9 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-/***
- * @author Anuradha
- */
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+
 import lombok.Data;
 
 @Entity
@@ -21,7 +19,8 @@ public class User {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private long profileId;	
-	private String userId;
+	private Long userId;
 	private String userName;
 	private String password;
+
 }
