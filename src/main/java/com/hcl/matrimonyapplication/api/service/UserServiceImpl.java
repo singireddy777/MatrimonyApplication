@@ -48,10 +48,18 @@ public class UserServiceImpl implements UserService {
 		logger.info("profileId------"+user1.getProfileId());
 		UserDetailDTO userDetailsDto = new UserDetailDTO();
 		logger.info("id : "+user1.getProfileId());
+		if(user1.getPassword() != null) 
+		{
 		userDetailsDto.setProfileId(user1.getProfileId());
 		userDetailsDto.setMessage("User Profile is Successfully Registered...");
 		userDetailsDto.setStatus("SUCCESS");
 		userDetailsDto.setStatusCode(200);
+		}
+		else {
+		userDetailsDto.setMessage("User Profile is Not Registered...");
+		userDetailsDto.setStatus("ERROR");
+		userDetailsDto.setStatusCode(400);
+		}
 		return userDetailsDto;
 	}
 }

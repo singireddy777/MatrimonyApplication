@@ -40,6 +40,7 @@ public class UserServiceImplTest {
 		BeanUtils.copyProperties(user, userDTO);
 		Mockito.when(userRepository.save(Mockito.any())).thenReturn(user);
 		UserDetailDTO result = userServiceImpl.registerUser(userDTO);
+		assertNotNull(user);
 		assertEquals("SUCCESS", result.getStatus());
 	}
 }
